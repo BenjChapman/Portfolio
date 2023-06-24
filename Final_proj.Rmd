@@ -1,0 +1,72 @@
+---
+title: "Stat 21 Final Project Part 1"
+author: "Ben Chapman"
+date: 'Due: April 19th'
+output:
+  word_document: default
+  bookdown::pdf_book: null
+bibliography: final_project_1.bib
+link-citations: yes
+---
+
+```{asis, directions=TRUE}
+To include mathematical equations in your document, write in between two dollar signs. Make sure there is no space after the first dollar sign or before the last one. 
+
+E.g. \$this is good\$  but  \$ this is bad \$.
+  
+If you want the equation to be centered and on it's own line, then put it in between four dollar signs 
+
+\begin{center}\$\$like this\$\$.\end{center}
+
+If you are using an offline version of RStudio, you need to make sure you have LateX installed on your computer as well. Without this, you will not be able to produce neat mathematical equations in your document.  
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message = FALSE) 
+knitr::opts_chunk$set(warning = FALSE) 
+knitr::opts_chunk$set(echo=TRUE) 
+
+library(ggplot2)
+library(tidyverse)
+library(gridExtra)
+library(gcookbook)
+library(knitr)
+```
+
+## Introduction 
+
+This is a recipe for chocolate chip cookies. They were first made by accident in the 1930s by Ruth Wakefield and they were first called Butterdrop Do Cookies [@historical]
+
+## Methods 
+
+Ingredients
+
+1 cup butter, softened
+1 cup white sugar
+1 cup packed brown sugar
+2 eggs 
+2 teaspoons vanilla extract
+1 teaspoon baking soda
+2 teaspoons hot water
+½ teaspoon salt
+3 cups all-purpose flour 
+2 cups semisweet chocolate chips
+1 cup chopped walnuts
+
+Step 1
+Preheat oven to 350 degrees F (175 degrees C).
+
+Step 2
+Cream together the butter, white sugar, and brown sugar until smooth. Beat in the eggs one at a time, then stir in the vanilla. Dissolve baking soda in hot water. Add to batter along with salt. Stir in flour, chocolate chips, and nuts. Drop by large spoonfuls onto ungreased pans.
+
+Step 3
+Bake for about 10 minutes in the preheated oven, or until edges are nicely browned.
+[@recipe]
+
+
+## Conclusion 
+
+Chocolate chip cookies are a classic dessert and loved by many. This is a simple, easy recipe to enjoy. 
+
+## Bibliography 

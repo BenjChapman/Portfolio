@@ -1,0 +1,141 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Stat 21 Final Project Part 1},
+  pdfauthor={Ben Chapman},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+
+\title{Stat 21 Final Project Part 1}
+\author{Ben Chapman}
+\date{Due: April 19th}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+To include mathematical equations in your document, write in between two dollar signs. Make sure there is no space after the first dollar sign or before the last one.
+
+E.g. \$this is good\$ but \$ this is bad \$.
+
+If you want the equation to be centered and on it's own line, then put it in between four dollar signs
+
+\begin{center}\$\$like this\$\$.\end{center}
+
+If you are using an offline version of RStudio, you need to make sure you have LateX installed on your computer as well. Without this, you will not be able to produce neat mathematical equations in your document.
+
+\hypertarget{introduction}{%
+\subsection{Introduction}\label{introduction}}
+
+This is a recipe for chocolate chip cookies. They were first made by accident in the 1930s by Ruth Wakefield and they were first called Butterdrop Do Cookies (Bulow \protect\hyperlink{ref-historical}{2014})
+
+\hypertarget{methods}{%
+\subsection{Methods}\label{methods}}
+
+Ingredients
+
+1 cup butter, softened
+1 cup white sugar
+1 cup packed brown sugar
+2 eggs
+2 teaspoons vanilla extract
+1 teaspoon baking soda
+2 teaspoons hot water
+½ teaspoon salt
+3 cups all-purpose flour
+2 cups semisweet chocolate chips
+1 cup chopped walnuts
+
+Step 1
+Preheat oven to 350 degrees F (175 degrees C).
+
+Step 2
+Cream together the butter, white sugar, and brown sugar until smooth. Beat in the eggs one at a time, then stir in the vanilla. Dissolve baking soda in hot water. Add to batter along with salt. Stir in flour, chocolate chips, and nuts. Drop by large spoonfuls onto ungreased pans.
+
+Step 3
+Bake for about 10 minutes in the preheated oven, or until edges are nicely browned.
+(``Best Chocolate Chip Cookies'' \protect\hyperlink{ref-recipe}{n.d.})
+
+\hypertarget{conclusion}{%
+\subsection{Conclusion}\label{conclusion}}
+
+Chocolate chip cookies are a classic dessert and loved by many. This is a simple, easy recipe to enjoy.
+
+\hypertarget{bibliography}{%
+\subsection*{Bibliography}\label{bibliography}}
+\addcontentsline{toc}{subsection}{Bibliography}
+
+\hypertarget{refs}{}
+\leavevmode\hypertarget{ref-recipe}{}%
+``Best Chocolate Chip Cookies.'' n.d. \emph{Allrecipes}. Accessed April 14, 2021. \url{https://www.allrecipes.com/recipe/10813/best-chocolate-chip-cookies/}.
+
+\leavevmode\hypertarget{ref-historical}{}%
+Bulow, Alessandra. 2014. ``5 Things You Didn't Know About Chocolate Chip Cookies Epicurious.Com.'' \emph{Epicurious}. \url{https://www.epicurious.com/archive/blogs/editor/2014/07/things-you-didnt-know-about-chocolate-chip-cookies.html}.
+
+\end{document}
