@@ -1,3 +1,6 @@
+#This looks at differences between race/ethnicity and socioeconomic levels relating to crime using data from 
+#the 2020 National Crime Victimization Survey
+
 #library("googledrive")
 
 #url_DS0001 = "https://drive.google.com/file/d/1yw_6RSxSFlOenZrvUpjG-CGbrzXLQB_J/view?usp=sharing" 
@@ -29,8 +32,6 @@ data_5 <- da38090.0005
 
 #install.packages("tidyverse")
 library(tidyverse)
-
-#Look at differences between Race/ethnicity and Socioeconomic levels
 
 #3071 job last week
 #V4479 employed
