@@ -1,0 +1,95 @@
+---
+title: "Regression Model for Four Factors in the NBA"
+author: 'Ben Chapman'
+date: 'May 15th'
+output:
+  word_document: default
+  bookdown::pdf_book: null
+link-citations: yes
+bibliography: references.bib
+---
+
+```{asis, directions=TRUE}
+To include mathematical equations in your document, write in between two dollar signs. Make sure there is no space after the first dollar sign or before the last one. 
+
+E.g. \$this is good\$  but  \$ this is bad \$.
+  
+If you want the equation to be centered and on it's own line, then put it in between four dollar signs 
+
+\begin{center}\$\$like this\$\$.\end{center}
+
+If you are using an offline version of RStudio, you need to make sure you have LateX installed on your computer as well. Without this, you will not be able to produce neat mathematical equations in your document.  
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message = FALSE) 
+knitr::opts_chunk$set(warning = FALSE) 
+knitr::opts_chunk$set(echo=TRUE) 
+
+library(ggplot2)
+library(tidyverse)
+library(gridExtra)
+library(gcookbook)
+library(knitr)
+```
+
+## Introduction 
+
+Basketball is a sport in which analytics have become increasingly more used to discover what the most impactful elements of the game are. Basketball has been one of the most analyzed sports and there have been many methods of analysis created to measure different game elements. There has been a lot of research on what game statistics influence wins. [@garcia; @mandic] A former scout, Dean Oliver, came up with an influential model called the four factors, which he noted as the four most important elements of a basketball game. The four factors are shooting, turnovers, rebounding, and free throws. [-@oliver] The four factors have been studied extensively, including studies on the trends over the years [@mandic], regression models for the four factors. Over a decade ago, Winston built a regression model for the four factors using data from 2006-2007 NBA season and he found that four factor model was an effective to look at team's strengths and weaknesses. [-@winston] In this paper we'll be looking at more current NBA data from the 2018-2019 season and exploring the four factors on offense and defense. 
+
+
+
+## Methods 
+
+The data is consists of team data from all 30 NBA teams from the 2018-2019 season. All the data was obtained from basketball-reference. The data consists of team names, win totals, offensive four factors, defensive four factors. For shooting, the statistic used is effective field goal percentage. Effective field goal percentage is calculated by (all field goals made + .5*(3 pt field goals made))/(field goals attempts). This is used because it weights 3 pointers by 50% since they are worth 50% more points, so it is a better metric than field goal percentage. The variable off_shooting for each team is their own effective field goal percentage and def_shooting is the effective field goal percentage of what their opponents against them. Turnovers is the estimated turnovers per possession. A possession is begins when a team has control of the basketball and it ends when the team gives up control of the basketball. The variable off_turnovers measures the turnovers a team committed per possession and def_turnovers measures the turnovers a team caused there opponents to commit per possession. The variable off_rebounding is a percentage of rebounds a team gets from their own missed shots and def_rebounding is a percentage of rebounds a team gets from their opponents missed shots. The variable off_freethrows is the (foul shots made)/(field goal attempts) and def_freethrows is the (opponents foul shots made)/(opponents field goal attempts). [@winston]
+
+I built a multiple linear regression model with the offensive and defensive four factors as the predictors and wins as the response.
+
+Looking at a correlation matrix, none of the variables have any correlations greater than .6, so we can assume that there is no multicollineairty. In the residual plot there is no pattern and the variance is constant, so we can assume that there is a linear relationship and homoskedascity. In the normal probability plot the data has a slight skew, so the normality assumption doesn't hold.  
+
+ 
+```{r}
+NBA_data <- read_csv("NBA_data.csv")
+mod <- lm(wins ~ off_shooting + off_turnovers + off_rebounding + off_freethrows + def_shooting + def_turnovers + def_rebounding + def_freethrows, NBA_data)
+confint(mod, "wins", level=.95)
+#correlation matrix
+cor(NBA_data %>% dplyr::select(-c(team_name, wins)))
+library("MASS")
+mod %>% studres 
+data_res <- NBA_data %>% mutate(stu_res = studres(mod),
+                                  fit_y = mod$fitted.values)
+ggplot(data_res, aes(x=fit_y, y=stu_res)) + 
+  geom_point() + 
+  labs(title="Residual plot",
+       y='Residuals',
+       x='Fitted Values')
+ggplot(data_res, aes(sample=stu_res)) +
+  stat_qq() + 
+  stat_qq_line() + 
+  labs(title="Normal Probability Plot")
+```
+
+
+## Results
+
+```{r}
+mod <- lm(wins ~ off_shooting + off_turnovers + off_rebounding + off_freethrows + def_shooting + def_turnovers + def_rebounding + def_freethrows, NBA_data)
+summary(mod)
+```
+  
+
+From our model we can gather that average games won = -111.84 + 427.19(off_shooting) - 484.46(off_turnovers) + 141.59(off_rebounding) + 87.70(off_freethrows) - 333.11(def_shooting) + 216(def_turnovers) + 111.82(def_rebounding) + 4.27(def_freethrows)
+The four factors cover 94.1% of variation in the games won. Using a Hypothesis test for multiple linear regression with 0.05 significance level, a null hypothesis of all the beta coefficients = 0 and alternative of at least one of the beta coefficients != 0. For this model we get that the p-value of 1.211e-12 < 0.05 so we reject the null and conclude that there is statistical evidence of correlation between wins and at least one of the variables. For hypothesis tests for individual predictors in multiple linear regression, the null hypothesis is that beta = 0 and alternative is beta != 0. Using a 0.05 significance level for the 8 predictors defensive free throws has a p-value > 0.05 and so there is no statistically significant evidence of correlation between defensive free throws and wins. The other seven predictors all have p-value < 0.05 so there is statistically significant evidence of correlation between each of those predictors and wins. 
+
+## Conclusion
+
+The overall model seems strong which is backed up by previous literature, but there are so differences between this model and previous ones[@mandic; @winston].
+For every 1% increase in effective field goal percentage teams will win an average 4.27 more games and for every 1% increase in opponent's effective field goal percentage teams will lose an average of 3.33 more games. A team's own effective field goal percentage has a greater impact on wins than their opponents. Shooting well is more important for teams, then defending well, but they are both still important. The effect of opponents shooting is similar to a previous model but, team shooting has a larger effect than the previous model. [@winston] This makes sense because the literature has shown that shooting has been trending upward [@mandic] and having a greater impact on the dynamics of the game. [@garcia]
+For every additional turnover per 100 possessions teams will lose an average 4.84 more games and for every additional turnover caused per 100 possessions teams will win an average of 2.16 more games. The effects of turnovers committed and turnovers forced are different from the previous model by themselves, but their average is similar to the previous model. [@winston] The total effect of turnovers is similar, but taking care of the ball and not turning it ball over is a greater impact on wins than forcing turnovers.    
+For every additional offensive rebound per 100 missed shots teams will win an average of 1.41 more games and for every additional defensive rebound per 100 missed shots teams will win an average if 1.11 more games. The impact of rebounding is similar to the previous model. [@winston] Offensive rebounding seems to have a slightly higher impact.     
+For every 1 free throw made per 100 field goal attempts teams will win an average of .87 more games and for every 1 opponent free throw made per 100 field goal attempts teams will win an average of .04 more games. The opponent free throw makes having a positive effect on wins doesn't make sense, but the effect is small and the hypothesis test shows no correlation between defensive free throws and wins. Compared to the previous model free throws are not correlated with wins, and there estimated effect is similar [@winston].
+Limitations from this model is that it doesn't complete the normality assumption, so while the inference is similar to previous literature, it the data isn't valid for inference. Future studies could look into possible data transformations for the data to try to fit the normality assumption. This model also wasn't able to compare the impact of each of the factors individually, so there could be more work done on which of the factors have the greatest impacts on winning. 
+
+## Bibliography 
+
