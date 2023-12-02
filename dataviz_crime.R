@@ -243,7 +243,7 @@ summary(one.way)
 
 TukeyHSD(one.way)
 
-#Victims with Some college with no degree had significantly more incidents reported than victims with bachelor degree
+#Victims that had some college with no degree had significantly more incidents reported than victims with a bachelor's degree
 
 ggplot(edu_data) +
   aes(x = V3020A, y = V3081, color = V3020A) +
