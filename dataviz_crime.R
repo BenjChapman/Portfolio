@@ -1,5 +1,5 @@
-#This looks at differences between race/ethnicity and socioeconomic levels relating to crime using data from 
-#the 2020 National Crime Victimization Survey
+#A project that analyzes the differences between race/ethnicity and socioeconomic levels relating to crime  
+#using data from the 2020 National Crime Victimization Survey
 
 #library("googledrive")
 
@@ -89,7 +89,7 @@ ggplot(dat) +
   geom_bar(position = "fill") +
   labs(x = "Job Last 6 Months", fill = "Help from Victim Agency")
 
-#More victims with no job in last week got help from victim agency
+#Higher proportion of victims with no job in the last week recieved help from a victim agency
 
 job_2 <- new_merged_data %>% filter(new_merged_data$V4439 == "(1) Within 5 min" 
                                     | new_merged_data$V4439 == "(2) Within 10 min"
@@ -111,7 +111,7 @@ ggplot(jobdat) +
   geom_bar(position = "fill") +
   labs(x = "Employment", fill = "Help from Victim Agency")
 
-#More victims with no employment got help from victim agency
+#Higher proportion of victims with no employment recieved help from a victim agency
 
 edu_data <- new_merged_data %>% filter(new_merged_data$V3020A == "(1) no diploma" 
                                        | new_merged_data$V3020A == "(28) High school grad"
@@ -134,7 +134,7 @@ ggplot(edudat) +
   geom_bar(position = "fill") +
   labs(x = "Education Level", fill = "Did Police Come")
 
-#Higher proportion of police that came for victims with less education
+#Higher proportion of police that arrived to the victim when notified of the crime for victims with less education
 
 edu_2 <- edu_data %>% filter(edu_data$V4439 == "(1) Within 5 min" 
                              | edu_data$V4439 == "(2) Within 10 min"
@@ -164,7 +164,7 @@ ggplot(racedat) +
   geom_bar(position = "fill") + 
   labs(x = "Race", fill = "Did Police Come")
 
-#Higher proportion of police came for  Black victims, and lower for Asian victims
+#Higher proportion of police that arrived to the victim for Black victims, and lower for Asian victims
 
 race_2 <- race_data_2 %>% filter(race_data_2$V4439 == "(1) Within 5 min" 
                                  | race_data_2$V4439 == "(2) Within 10 min"
@@ -181,7 +181,7 @@ ggplot(race2dat) +
   geom_bar(position = "fill") +
   labs(x = "Race", fill = "How Long Police Took")
 
-#Police took longer to come for Black victims
+#Police took longer to come when notified for Black victims
 
 hispanic <- new_merged_data %>% filter(new_merged_data$V4438 == "(1) Yes" 
                                        |new_merged_data$V4438 == "(2) No") %>% droplevels()
@@ -195,7 +195,7 @@ ggplot(hispdat) +
   geom_bar(position = "fill") +
   labs(x = "Hispanic", fill = "Did Police Come")
 
-#Higher proportion of police came for Hispanic victims
+#Higher proportion of police arrived to the victim for Hispanic victims
 
 hispanic_2 <- new_merged_data %>% filter(new_merged_data$V4439 == "(1) Within 5 min" 
                                          | new_merged_data$V4439 == "(2) Within 10 min"
